@@ -1,0 +1,123 @@
+import numpy as np
+import matplotlib.pylab as plt
+
+x = np.array([10, 11, 12, 13, 14])
+y = np.array([0,1,2,3,4])
+
+x+y
+
+x-y
+
+np.array([[5, 6], [7, 8]]) + np.array([[10, 20], [30, 40]]) - \
+np.array([[1,2], [3,4]])
+
+
+x = np.array([[1], [2], [3]])
+y = np.array([[4], [5], [6]])
+
+x.T@y #또는 np.dot(x.T, y)
+
+x = np.array([1, 2, 3])
+y = np.array([4, 5, 6])
+
+x@y #또는 np.dot(x, y)
+
+#연습문제 2.2.1
+
+p = np.array([[100], [80], [50]])
+n = np.array([[3], [4], [5]])
+
+n.T @ p
+
+x = np.arange(10)
+N = len(x)
+
+np.ones(N) @ x/N
+
+from sklearn.datasets import load_digits
+import matplotlib.gridspec as gridspec
+
+digits = load_digits()
+
+d1 = digits.images[0]
+d2 = digits.images[10]
+d3 = digits.images[1]
+d4 = digits.images[11]
+
+v1 = d1.reshape(64, 1)
+v2 = d2.reshape(64, 1)
+v3 = d3.reshape(64, 1)
+v4 = d4.reshape(64, 1)
+
+plt.figure(figsize = (9, 9))
+gs = gridspec.GridSpec(1, 8, height_ratios=[1], width_ratios = [9, 1, 9, 1, 9, 1, 9, 1])
+
+for i in range(4):
+    plt.subplot(gs[2*i])
+    plt.imshow(eval("d" + str(i+1)), aspect=1, interpolation = 'nearest', cmap = plt.cm.bone_r)
+    plt.grid(False)
+    plt.xticks([])
+    plt.yticks([])
+    plt.title("image {}".format(i+1))
+    plt.subplot(gs[2*i + 1])
+    plt.imshow(eval("v" + str(i+1)), aspect = 0.25, interpolation = 'nearest', cmap = plt.cm.bone_r)
+    plt.grid(False)
+    plt.xticks([])
+    plt.yticks([])
+    plt.title("vector {}".format(i+1))
+
+plt.tight_layout()
+plt.show()
+
+
+(v1.T @ v2)[0][0], (v3.T @ v4)[0][0]
+
+(v1.T @ v3)[0][0], (v1.T @ v4)[0][0], (v2.T @ v3)[0][0], (v2.T @ v4)[0][0]
+
+x.mean()
+
+(x.T @ y)[0][0]
+
+p = np.array([[100], [80], [50]])
+
+n = np.array([[3], [4], [5]])
+
+p.T @ n
+
+n.T @ p
+
+#문제 2.2.3
+
+from sklearn.datasets import load_digits
+X = load_digits().data
+X
+
+A = np.array([[1, 2, 3], [4, 5, 6]])
+B = np.array([[1, 2], [3, 4], [5, 6]])
+C = A @ B
+C
+
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+C = np.array([[9, 8], [7, 6]])
+
+#교환법칙
+A @ B
+B @ A
+
+
+#분배법칙
+A @ (B + C)
+A @ B + A @ C
+
+(A + B) @ C
+A @ C + B @ C
+
+#전치연산에 대한 분배법칙 확인
+(A + B).T
+A.T + B.T
+
+
+#곱셈 연산에 대한 분배법칙 확인)
+(A @ B).T
+B.T @ A.T
