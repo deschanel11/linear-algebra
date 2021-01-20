@@ -34,6 +34,8 @@ N = len(x)
 
 np.ones(N) @ x/N
 
+
+#숫자 그림 다운해서 열벡터로 만들어 내적을 취해 유사도 알아보기
 from sklearn.datasets import load_digits
 import matplotlib.gridspec as gridspec
 
@@ -121,3 +123,51 @@ A.T + B.T
 #곱셈 연산에 대한 분배법칙 확인)
 (A @ B).T
 B.T @ A.T
+
+#항등행렬 만들어서 테스트 해보기
+A = np.array([[1, 2], [3, 4]])
+I = np.eye(2)
+
+A@I
+I@A
+
+#morping effect using linear combination 선형 조합을 이용한 
+
+from sklearn.datasets import fetch_olivetti_faces
+
+faces = fetch_olivetti_faces()
+
+f, ax = plt.subplots(1, 3)
+
+ax[0].imshow(faces.images[6], cmap = plt.cm.bone)
+ax[0].grid(False)
+ax[0].set_xticks([])
+ax[0].set_yticks([])
+ax[0].set_title("image 1: $x_1$")
+
+ax[1].imshow(faces.images[10], cmap = plt.cm.bone)
+ax[1].grid(False)
+ax[1].set_xticks([])
+ax[1].set_yticks([])
+ax[1].set_title("image 2: $x_2$")
+
+new_face = 0.7 * faces.images[6] + 0.3 * faces.images[10]
+ax[2].imshow(new_face, cmap = plt.cm.bone)
+ax[2].grid(False)
+ax[2].set_xticks([])
+ax[2].set_yticks([])
+ax[2].set_title("image 3: $0.7x_1 + 0.3x_2$")
+
+plt.show()
+
+
+#2차형식 만들
+
+x = np.array([1,2,3])
+x
+
+A = np.arange(1, 10).reshape(3, 3)
+A
+
+x.T@A@x
+
